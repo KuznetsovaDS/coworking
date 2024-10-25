@@ -14,12 +14,16 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BookingResponseDto extends BookingRequestDto {
+
     Long id;
+
     Double totalCost;
+
     BookingStatus bookingStatus;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     Long userId;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     Long workspaceId;
-
 }

@@ -9,9 +9,9 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserRequestDto {
+
     String email;
     String password;
     String firstName;
     String lastName;
-
 }

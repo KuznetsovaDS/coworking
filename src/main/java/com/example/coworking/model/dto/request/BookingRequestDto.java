@@ -10,8 +10,11 @@ import java.time.LocalDateTime;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookingRequestDto {
+
     LocalDateTime startTime;
+    LocalDateTime endTime;
+
     Long userId;
     Long workspaceId;
-    LocalDateTime endTime;
+
 }

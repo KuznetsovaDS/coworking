@@ -26,8 +26,10 @@ public class User {
 
     @Column(name = "first_name")
     String firstName;
+
     @Column(name = "last_name")
     String lastName;
+
     @Column(name = "created_at")
     LocalDateTime createdAt;
 
@@ -40,9 +42,11 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonManagedReference(value = "user-reviews")
     List<Review> reviews;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonManagedReference(value = "user-payments")
     List<Payment> payments;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonManagedReference(value = "user-bookings")
     List<Booking> bookings;

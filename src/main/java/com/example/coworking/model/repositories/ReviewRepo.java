@@ -8,11 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface ReviewRepo extends JpaRepository<Review, Long> {
    @Query("select r from Review r where r.reviewStatus <> :status")
    Page<Review> findAllNotDeleted (Pageable pageable, @Param("status") ReviewStatus status);
-
 }

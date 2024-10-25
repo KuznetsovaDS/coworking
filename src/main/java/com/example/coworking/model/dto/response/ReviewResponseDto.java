@@ -13,7 +13,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReviewResponseDto extends ReviewRequestDto {
+
     Long id;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UserResponseDto user;
 }

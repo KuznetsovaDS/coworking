@@ -7,7 +7,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,16 +15,13 @@ import java.time.LocalDateTime;
 @Table(name = "payments")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Payment {
+
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     Long id;
 
     @Column(name = "created_at")
     LocalDateTime createdAt;
-
-    @ManyToOne
-    @JsonBackReference(value = "user-payments")
-    User user;
 
     @Column(name = "payment_time")
     LocalDateTime paymentTime;
@@ -34,6 +30,10 @@ public class Payment {
 
     @Column(name = "updated_at")
     LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JsonBackReference(value = "user-payments")
+    User user;
 
     @OneToOne
     @JoinColumn(name = "booking_id")

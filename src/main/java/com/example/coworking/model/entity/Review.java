@@ -8,7 +8,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -28,6 +27,8 @@ public class Review {
 
     Rating rating;
 
+    ReviewStatus reviewStatus;
+
     @ManyToOne
     @JsonBackReference(value = "user-reviews")
     User user;
@@ -36,9 +37,6 @@ public class Review {
     @JsonBackReference(value = "workspace-reviews")
     Workspace workspace;
 
-    ReviewStatus reviewStatus;
-
     @Column(name = "updated_at")
     LocalDateTime updatedAt;
-
 }

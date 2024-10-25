@@ -7,6 +7,7 @@ import com.example.coworking.model.entity.User;
 import java.util.List;
 
 public interface UserService {
+
     UserResponseDto createUser(UserRequestDto userRequest);
 
     UserResponseDto getUser(Long id);

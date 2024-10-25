@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ReviewRequestDto {
+
     String comment;
     Rating rating;
     Long workspaceId;

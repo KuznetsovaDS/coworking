@@ -16,6 +16,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WorkspaceResponseDto extends WorkspaceRequestDto {
     Long id;
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     List<BookingResponseDto> bookings;
 }

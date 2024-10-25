@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PaymentRequestDto {
+
     LocalDateTime paymentTime;
     Long userId;
 }

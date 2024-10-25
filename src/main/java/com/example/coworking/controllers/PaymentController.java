@@ -49,6 +49,5 @@ public class PaymentController {
                                                   @RequestParam(defaultValue = "ASC")  Sort.Direction order){
         return paymentService.getAllPayment(page, perPage, sort, order);
     }
-
 }
 

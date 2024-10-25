@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 public interface PaymentService {
 
     PaymentResponseDto createPayment(Booking savedBooking, PaymentRequestDto paymentRequestDto);
+
     PaymentResponseDto getPayment(Long id);
 
     PaymentResponseDto update(Long id, PaymentRequestDto paymentRequestDto);
