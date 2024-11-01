@@ -5,6 +5,7 @@ import com.example.coworking.model.dto.request.PaymentRequestDto;
 import com.example.coworking.model.dto.response.PaymentResponseDto;
 import com.example.coworking.model.entity.Booking;
 import com.example.coworking.model.entity.Payment;
+import com.example.coworking.model.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import com.example.coworking.model.enums.PaymentStatus;
@@ -33,9 +34,12 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     public PaymentResponseDto createPayment(Booking savedBooking, PaymentRequestDto paymentRequestDto) {
-        Payment payment = mapper.convertValue(paymentRequestDto, Payment.class);
+        Payment payment = new Payment();
         payment.setCreatedAt(LocalDateTime.now());
         payment.setPaymentStatus(PaymentStatus.UNPAID);
+        payment.setPaymentTime(paymentRequestDto.getPaymentTime());
+        User user = userService.getUserEntity(paymentRequestDto.getUserId());
+        payment.setUser(user);
         payment.setBooking(savedBooking);
         Payment save = paymentRepo.save(payment);
         return mapper.convertValue(save, PaymentResponseDto.class);
