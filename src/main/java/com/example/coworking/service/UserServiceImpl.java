@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
             throw new CustomException("Invalid email", HttpStatus.BAD_REQUEST);
         }
 
-        userRepo.findByEmail(userRequestDto.getEmail())
+        userRepo.findByEmail(email)
                 .ifPresent(u -> {
                     throw  new CustomException("User already exist", HttpStatus.CONFLICT);
                 });
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService{
         user.setEmail(StringUtils.isBlank(request.getEmail()) ? user.getEmail() : request.getEmail());
         user.setFirstName(StringUtils.isBlank(request.getFirstName()) ? user.getFirstName() : request.getFirstName());
         user.setLastName(StringUtils.isBlank(request.getLastName()) ? user.getLastName() : request.getLastName());
-       user.setPassword(StringUtils.isBlank(request.getPassword()) ? user.getPassword() : request.getPassword());
+        user.setPassword(StringUtils.isBlank(request.getPassword()) ? user.getPassword() : request.getPassword());
 
         user.setStatus(UserStatus.UPDATED);
         user.setUpdatedAt(LocalDateTime.now());

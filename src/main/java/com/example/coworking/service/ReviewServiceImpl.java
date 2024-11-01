@@ -4,8 +4,12 @@ import com.example.coworking.exceptions.CustomException;
 import com.example.coworking.model.dto.request.ReviewRequestDto;
 import com.example.coworking.model.dto.response.ReviewResponseDto;
 import com.example.coworking.model.entity.Review;
+import com.example.coworking.model.entity.User;
+import com.example.coworking.model.entity.Workspace;
 import com.example.coworking.model.enums.ReviewStatus;
 import com.example.coworking.model.repositories.ReviewRepo;
+import com.example.coworking.model.repositories.UserRepo;
+import com.example.coworking.model.repositories.WorkspaceRepo;
 import com.example.coworking.utils.PaginationUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +30,24 @@ import java.util.stream.Collectors;
 public class ReviewServiceImpl implements ReviewService {
     private final ObjectMapper mapper;
     private final ReviewRepo reviewRepo;
+    private final UserRepo userRepo;
+    private final WorkspaceRepo workspaceRepo;
 
     @Override
     public ReviewResponseDto createReview(ReviewRequestDto reviewRequestDto) {
-        Review review = mapper.convertValue(reviewRequestDto, Review.class);
+        User user = userRepo.findById(reviewRequestDto.getUserId())
+                .orElseThrow(() -> new CustomException("User not found!", HttpStatus.NOT_FOUND));
+
+        Workspace workspace = workspaceRepo.findById(reviewRequestDto.getWorkspaceId())
+                .orElseThrow(() -> new CustomException("Workspace not found!", HttpStatus.NOT_FOUND));
+        Review review = new Review();
+        review.setComment(reviewRequestDto.getComment());
+        review.setRating(reviewRequestDto.getRating());
+        review.setUser(user);
+        review.setWorkspace(workspace);
         review.setCreatedAt(LocalDateTime.now());
         Review save = reviewRepo.save(review);
+        log.info(" Review was saved with ID: {}", save.getId());
         return mapper.convertValue(save, ReviewResponseDto.class);
     }
 
