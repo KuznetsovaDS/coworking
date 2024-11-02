@@ -51,12 +51,12 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails admin = User.withUsername("user")
+        UserDetails user = User.withUsername("user")
                 .password(passwordEncoder().encode("user"))
                 .roles("USER")
                 .build();
 
-        return new InMemoryUserDetailsManager(admin);
+        return new InMemoryUserDetailsManager(user);
     }
 
     @Bean
