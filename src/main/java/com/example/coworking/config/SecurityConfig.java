@@ -39,7 +39,7 @@ public class SecurityConfig {
                         .requestMatchers(GENERAL_WHITELIST).permitAll()
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .anyRequest().hasRole("ADMIN")
+                        .anyRequest().hasRole("USER")
                 )
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -51,9 +51,9 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails admin = User.withUsername("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
+        UserDetails admin = User.withUsername("user")
+                .password(passwordEncoder().encode("user"))
+                .roles("USER")
                 .build();
 
         return new InMemoryUserDetailsManager(admin);
