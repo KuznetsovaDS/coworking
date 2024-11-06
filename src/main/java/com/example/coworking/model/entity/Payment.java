@@ -35,7 +35,7 @@ public class Payment {
     @JsonBackReference(value = "user-payments")
     User user;
 
-    @OneToOne(mappedBy = "payment")
+    @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
     @JsonBackReference
     Booking booking;
 }

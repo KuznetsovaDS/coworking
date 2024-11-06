@@ -69,14 +69,15 @@ public class BookingServiceImpl implements BookingService{
         booking.setBookingStatus(BookingStatus.CONFIRMED);
         booking.setCreatedAt(LocalDateTime.now());
         booking.setTotalCost(totalCost);
-        Booking saveBooking = bookingRepo.save(booking);
 
-        PaymentRequestDto paymentRequestDto = new PaymentRequestDto();
-        paymentRequestDto.setPaymentTime(LocalDateTime.now());
-        PaymentResponseDto paymentResponse = paymentService.createPayment(saveBooking, paymentRequestDto);
-        Payment createPayment = mapper.convertValue(paymentResponse, Payment.class);
-        saveBooking.setPayment(createPayment);
-        bookingRepo.save(saveBooking);
+
+        Payment payment = new Payment();
+        payment.setCreatedAt(LocalDateTime.now());
+        payment.setPaymentStatus(PaymentStatus.UNPAID);
+        booking.setPayment(payment);
+        payment.setBooking(booking);
+
+        Booking saveBooking = bookingRepo.save(booking);
 
         return mapper.convertValue(saveBooking,BookingResponseDto.class);
     }

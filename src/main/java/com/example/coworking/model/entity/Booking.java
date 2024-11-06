@@ -47,8 +47,8 @@ public class Booking {
     @JsonBackReference(value = "workspace-bookings")
     Workspace workspace;
 
-    @OneToOne
-    @JoinColumn(name = "payment_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_id", referencedColumnName = "id", unique = true)
     @JsonManagedReference
     Payment payment;
 
