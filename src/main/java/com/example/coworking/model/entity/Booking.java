@@ -47,7 +47,8 @@ public class Booking {
     @JsonBackReference(value = "workspace-bookings")
     Workspace workspace;
 
-    @OneToOne(mappedBy = "booking", fetch = FetchType.EAGER)
+    @OneToOne
+    @JoinColumn(name = "payment_id")
     @JsonManagedReference
     Payment payment;
 

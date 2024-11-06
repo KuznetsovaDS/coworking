@@ -38,8 +38,11 @@ public class PaymentServiceImpl implements PaymentService{
         payment.setCreatedAt(LocalDateTime.now());
         payment.setPaymentStatus(PaymentStatus.UNPAID);
         payment.setPaymentTime(paymentRequestDto.getPaymentTime());
-        User user = userService.getUserEntity(paymentRequestDto.getUserId());
-        payment.setUser(user);
+        if (paymentRequestDto.getUserId() != null) {
+            User user = userService.getUserEntity(paymentRequestDto.getUserId());
+            payment.setUser(user);
+        }
+
         payment.setBooking(savedBooking);
         Payment save = paymentRepo.save(payment);
         return mapper.convertValue(save, PaymentResponseDto.class);

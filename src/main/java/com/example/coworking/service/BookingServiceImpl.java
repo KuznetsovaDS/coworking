@@ -4,6 +4,7 @@ import com.example.coworking.exceptions.CustomException;
 import com.example.coworking.model.dto.request.BookingRequestDto;
 import com.example.coworking.model.dto.request.PaymentRequestDto;
 import com.example.coworking.model.dto.response.BookingResponseDto;
+import com.example.coworking.model.dto.response.PaymentResponseDto;
 import com.example.coworking.model.entity.Booking;
 import com.example.coworking.model.entity.Payment;
 import com.example.coworking.model.entity.Workspace;
@@ -72,7 +73,10 @@ public class BookingServiceImpl implements BookingService{
 
         PaymentRequestDto paymentRequestDto = new PaymentRequestDto();
         paymentRequestDto.setPaymentTime(LocalDateTime.now());
-        paymentService.createPayment(saveBooking, paymentRequestDto);
+        PaymentResponseDto paymentResponse = paymentService.createPayment(saveBooking, paymentRequestDto);
+        Payment createPayment = mapper.convertValue(paymentResponse, Payment.class);
+        saveBooking.setPayment(createPayment);
+        bookingRepo.save(saveBooking);
 
         return mapper.convertValue(saveBooking,BookingResponseDto.class);
     }

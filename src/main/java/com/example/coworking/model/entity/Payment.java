@@ -35,8 +35,7 @@ public class Payment {
     @JsonBackReference(value = "user-payments")
     User user;
 
-    @OneToOne
-    @JoinColumn(name = "booking_id")
+    @OneToOne(mappedBy = "payment")
     @JsonBackReference
     Booking booking;
 }

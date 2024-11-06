@@ -70,7 +70,7 @@ public class ReviewServiceImplTest {
         reviewRequestDto.setWorkspaceId(1L);
 
         when(userRepo.findById(1L)).thenReturn(Optional.empty());
-        when(workspaceRepo.findById(1L)).thenReturn(Optional.of(new Workspace()));
+
 
         reviewService.createReview(reviewRequestDto);
     }
